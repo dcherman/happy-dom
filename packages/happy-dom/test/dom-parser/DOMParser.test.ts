@@ -4,6 +4,7 @@ import DOMParser from '../../src/dom-parser/DOMParser.js';
 import DOMParserHTML from './data/DOMParserHTML.js';
 import { beforeEach, describe, it, expect } from 'vitest';
 import DOMParserSVG from './data/DOMParserSVG';
+import Node from '../../src/nodes/node/Node.js';
 
 describe('DOMParser', () => {
 	let domParser: DOMParser;
@@ -103,6 +104,9 @@ describe('DOMParser', () => {
 			expect(new XMLSerializer().serializeToString(newDocument).replace(/[\s]/gm, '')).toBe(
 				DOMParserSVG.replace(/[\s]/gm, '')
 			);
+
+			expect(newDocument.documentElement).toBeInstanceOf(Node);
+			expect(newDocument.documentElement.tagName).toBe('SVG');
 		});
 	});
 });
